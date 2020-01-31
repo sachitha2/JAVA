@@ -56,6 +56,23 @@ public class DB {
 
         if(state == 0){
             //register user
+            DB obj_DB_Connection=new DB();
+            Connection connection=null;
+            connection=obj_DB_Connection.get_connection();
+            PreparedStatement ps=null;
+            String query="INSERT INTO user (id, username, password, type) VALUES (NULL, '"+o.getUsername()+"', '"+o.getPassword()+"', '0');";
+            try {
+                ps=connection.prepareStatement(query);
+                ps.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            Home home = new Home();
+            //register user end
+
+
+
             return state;
         }else{
             //set msg

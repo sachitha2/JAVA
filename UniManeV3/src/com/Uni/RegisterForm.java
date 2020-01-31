@@ -43,14 +43,20 @@ public class RegisterForm extends JFrame{
                 //create sign up part and intent to home
 
                 if(pass.getText().equals(pass2.getText())){
+
                     System.out.println("password match");
+
+                    signUpObj o = new signUpObj(uName.getText(),pass.getText());
+
+                    int states = obj_DB_Connection.signUp(o);
+
+                    frame.setVisible(false);
+
                 }else {
                     JOptionPane.showMessageDialog(null, "Password does not match");
                 }
 
-                signUpObj o = new signUpObj(uName.getText(),pass.getText());
 
-                int states = obj_DB_Connection.signUp(o);
 
 
 
