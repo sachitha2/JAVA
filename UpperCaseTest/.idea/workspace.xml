@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42c03089-02ba-423e-af20-2b4ae179426a" name="Default Changelist" comment="" />
+    <list default="true" id="42c03089-02ba-423e-af20-2b4ae179426a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../UIHelloWorld/src/com/chata/ToolBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../edureka/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../edureka/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../edureka/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../edureka/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../edureka/edureka.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../edureka/src/com/chata/Edureka.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIHelloWorld/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../UIHelloWorld/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIHelloWorld/out/production/UIHelloWorld/com/chata/MainFrame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../UIHelloWorld/out/production/UIHelloWorld/com/chata/MainFrame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIHelloWorld/out/production/UIHelloWorld/com/chata/MainFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/../UIHelloWorld/out/production/UIHelloWorld/com/chata/MainFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UIHelloWorld/src/com/chata/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UIHelloWorld/src/com/chata/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,10 +26,11 @@
     <session id="1631174614">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.48" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -46,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UpperCase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="272">
+              <caret line="16" column="5" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="16" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -83,6 +97,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -90,11 +105,15 @@
               <item name="UpperCaseTest" type="b2602c69:ProjectViewProjectNode" />
               <item name="UpperCaseTest" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="UpperCaseTest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="UpperCaseTest" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -142,8 +161,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25302014" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -177,8 +197,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/UpperCase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="272">
+          <caret line="16" column="5" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="16" selection-end-column="5" />
         </state>
       </provider>
     </entry>

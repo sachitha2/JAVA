@@ -4,17 +4,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 public class Login  extends JFrame{
+
+    public static DB obj_DB_Connection;
     private JPanel panel1;
     private JButton signInButton;
     private JButton signUpButton;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField uName;
+    private JTextField uPass;
     int x = 0;
 
     JLabel label;
     Login(){
+
+        obj_DB_Connection=new DB();
+        Connection connection=null;
+        connection=obj_DB_Connection.get_connection();
+        System.out.println(connection);
 
 
         JFrame frame = new JFrame("Login");
@@ -26,7 +34,19 @@ public class Login  extends JFrame{
         signInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("helloo sam"+x++);
+
+
+                signUpObj o = new signUpObj(uName.getText(),uPass.getText());
+
+                int s = obj_DB_Connection.checkLogin(o);
+
+                System.out.println(s);
+                if(s == 1){
+                    Home home = new Home();
+                    frame.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Your Username and Password incorrect");
+                }
 
 
             }
