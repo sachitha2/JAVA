@@ -5,17 +5,23 @@
  */
 package sliit.application;
 
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author CHATA
  */
 public class Student extends javax.swing.JFrame {
-
+    Connection con = JavaConnect.connectdb();
+    PreparedStatement ps = null;
+    ResultSet rs = null;
     /**
      * Creates new form Home
      */
     public Student() {
         initComponents();
+        JavaConnect.connectdb();
     }
 
     /**
@@ -371,6 +377,22 @@ public class Student extends javax.swing.JFrame {
 
     private void kButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton3ActionPerformed
         // TODO add your handling code here:
+        String students = "SELECT * FROM SLIIT.STUDENT FETCH FIRST 100 ROWS ONLY";
+        try{
+            ps = con.prepareStatement(students);
+//            ps.setString(1,gettext cne eka);
+
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Data available", students, HEIGHT);
+            }else{
+                JOptionPane.showMessageDialog(null, "Data not available", students, HEIGHT);
+            }
+        }
+        catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex, students, HEIGHT);
+        }
     }//GEN-LAST:event_kButton3ActionPerformed
 
     /**
