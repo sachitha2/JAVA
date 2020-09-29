@@ -583,6 +583,11 @@ public class Student extends javax.swing.JFrame {
                 "Academic Year & Semester", "Program", "Group ID", "Sub Group ID"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -750,6 +755,9 @@ public class Student extends javax.swing.JFrame {
         w.setVisible(true);
     }//GEN-LAST:event_jButton15ActionPerformed
 
+    
+    
+    
     private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
         // TODO add your handling code here:
 //        System.out.println(jTable1.getSelectedRow());
@@ -775,6 +783,13 @@ public class Student extends javax.swing.JFrame {
             System.out.println("Delete error");
         }
     }//GEN-LAST:event_kButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+//        System.out.println(jTable1.getSelectedRow());
+            int i = jTable1.getSelectedRow();
+            jTextField2.setText(jTable1.getValueAt(i,0).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
