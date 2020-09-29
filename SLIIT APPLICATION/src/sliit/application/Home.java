@@ -50,6 +50,7 @@ public class Home extends javax.swing.JFrame {
         kButton4 = new keeptoo.KButton();
         jButton16 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
+        jBtnTags = new javax.swing.JButton();
         kGradientPanel7 = new keeptoo.KGradientPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -242,6 +243,12 @@ public class Home extends javax.swing.JFrame {
         jButton17.setText("   Statics");
         kGradientPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 250, 60));
 
+        jBtnTags.setBackground(new java.awt.Color(51, 0, 255));
+        jBtnTags.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jBtnTags.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnTags.setText("Tags");
+        kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 250, 60));
+
         kGradientPanel7.setkEndColor(new java.awt.Color(204, 204, 204));
         kGradientPanel7.setkStartColor(new java.awt.Color(204, 204, 204));
 
@@ -281,7 +288,7 @@ public class Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
+            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(kGradientPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -341,6 +348,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnTags;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
