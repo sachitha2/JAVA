@@ -104,6 +104,11 @@ public class Home extends javax.swing.JFrame {
         jButton15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
         jButton15.setText("Working hours");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
         kGradientPanel2.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -324,6 +329,12 @@ public class Home extends javax.swing.JFrame {
         Tags tags = new Tags();
         tags.setVisible(true);
     }//GEN-LAST:event_jBtnTagsActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        this.dispose();
+        WorkingH w = new WorkingH();
+        w.setVisible(true);
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     /**
      * @param args the command line arguments
