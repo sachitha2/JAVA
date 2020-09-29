@@ -628,16 +628,21 @@ public class Student extends javax.swing.JFrame {
 
     private void kButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton3ActionPerformed
         // TODO add your handling code here:
-        
+        String AYS = jComboBox2.getSelectedItem().toString();
+        String program = jComboBox1.getSelectedItem().toString();
+        String GNO = jTextField1.getText();
+        String GID = jTextField2.getText();
+        String SGNO = jTextField3.getText();
+        String SGID = jTextField4.getText();
         //take data 
-        if(jTextField1.getText().length() == 0){
+        if(GNO.length() == 0){
             JOptionPane.showMessageDialog(null, "Enter a Group No", "Error", HEIGHT);
-        }else if(jTextField2.getText().length() == 0){
+        }else if(GID.length() == 0){
             JOptionPane.showMessageDialog(null, "Please Generate a group ID", "Error", HEIGHT);
         }
-        else if(jTextField3.getText().length() == 0){
+        else if(SGNO.length() == 0){
             JOptionPane.showMessageDialog(null, "Enter a Sub Group No", "Error", HEIGHT);
-        }else if(jTextField4.getText().length() == 0){
+        }else if(SGID.length() == 0){
             JOptionPane.showMessageDialog(null, "Please Generate a sub group ID", "Error", HEIGHT);
         }
         else{
@@ -646,9 +651,15 @@ public class Student extends javax.swing.JFrame {
             
                 
                     try{
-                        String sql = "INSERT INTO SLIIT.STUDENT (GNO, AYS, PROGRAM, GID, SGNO, SGID) VALUES ('rcsdf', 'erfds', 'efsda', 'fdsa', 'fsda', 'fdeas')";
+                        String sql = "INSERT INTO SLIIT.STUDENT (GNO, AYS, PROGRAM, GID, SGNO, SGID) VALUES (?, ?, ?, ?, ?, ?)";
 //                ps.setString(PROPERTIES, sql);
                     ps = con.prepareStatement(sql);
+                    ps.setString (1, GNO);
+                    ps.setString (2, AYS);
+                    ps.setString (3, program);
+                    ps.setString (4, GID);
+                    ps.setString (5, SGNO);
+                    ps.setString (6, SGID);
                     boolean result = ps.execute();
                     System.out.println(result);
                     
