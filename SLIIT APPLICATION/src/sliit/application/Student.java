@@ -24,15 +24,45 @@ public class Student extends javax.swing.JFrame {
     public Student() {
         initComponents();
         JavaConnect.connectdb();
-        ArrayList<Student.User> list = new ArrayList<Student.User>();
-        Student.User u1 = new Student.User("Y1.S1","FNA","LNA","10");
-        Student.User u2 = new Student.User("Y1.S1","FNA","LNA","10");
-        list.add(u1);
-        list.add(u2);
-        addRowToJTable(list);
+        showStudents();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y1.S1", "Y1.S2","Y2.S1","Y2.S2","Y3.S1","Y3.S2","Y4.S1","Y4.S2" }));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IT","CSSE","CSE","IM" }));
-        
+        jTextField2.setEditable(false);
+        jTextField4.setEditable(false);
+    }
+    
+    public void showStudents(){
+        String students = "SELECT * FROM SLIIT.STUDENT";
+            try{
+//                ps = con.createStatement();
+//                //            ps.setString(1,gettext cne eka);
+//
+//                rs = ps.executeQuery();
+                Statement statement = con.createStatement();
+ 
+                ResultSet results = statement.executeQuery(students);
+                
+                    while(results.next()){
+                        ArrayList<Student.User> list = new ArrayList<Student.User>();
+                        Student.User u1 = new Student.User(results.getString("AYS"),results.getString("program"),results.getString("gid"),results.getString("sgid"));
+                        list.add(u1);
+                        addRowToJTable(list);
+                        
+                        String data = results.getString("AYS");
+ 
+                        System.out.println("Fetching data by column name for row " + results.getRow() + " : " + data);
+ 
+                    }
+//                if(rs.next()){
+//                    JOptionPane.showMessageDialog(null, "Data available", students, HEIGHT);
+//                    System.out.println(rs.findColumn("AYS"));
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "Data not available", students, HEIGHT);
+//                }
+            }
+            catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, ex, students, HEIGHT);
+            }
     }
     
     public class User{
@@ -49,13 +79,7 @@ public class Student extends javax.swing.JFrame {
             this.sGno = sGno;
         }
     }
-    public ArrayList ListUsers()
-    {
-        ArrayList<Student.User> list = new ArrayList<Student.User>();
-        Student.User u1 = new Student.User("Y1.S1","FNA","LNA","10");
-        list.add(u1);
-        return list;
-    }
+    
     
 // added rows from arraylist to jtable
     public void addRowToJTable(ArrayList<Student.User> list)
@@ -540,7 +564,7 @@ public class Student extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Academic Year & Semester", "Program", "Group No", "Sub Group No"
+                "Academic Year & Semester", "Program", "Group ID", "Sub Group ID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -613,23 +637,12 @@ public class Student extends javax.swing.JFrame {
         }
         else{
                 
+                
             
-                String students = "SELECT * FROM SLIIT.STUDENT FETCH FIRST 100 ROWS ONLY";
-            try{
-                ps = con.prepareStatement(students);
-                //            ps.setString(1,gettext cne eka);
-
-                rs = ps.executeQuery();
-
-                if(rs.next()){
-                    JOptionPane.showMessageDialog(null, "Data available", students, HEIGHT);
-                }else{
-                    JOptionPane.showMessageDialog(null, "Data not available", students, HEIGHT);
-                }
-            }
-            catch(SQLException ex){
-                JOptionPane.showMessageDialog(null, ex, students, HEIGHT);
-            }
+                ArrayList<Student.User> list = new ArrayList<Student.User>();
+                Student.User u1 = new Student.User("test","test","tyest","test");
+                list.add(u1);
+                addRowToJTable(list);
         }
         
         
