@@ -24,14 +24,12 @@ public class Tags extends javax.swing.JFrame {
     public Tags() {
         initComponents();
         JavaConnect.connectdb();
-        showStudents();
-//        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y1.S1", "Y1.S2","Y2.S1","Y2.S2","Y3.S1","Y3.S2","Y4.S1","Y4.S2" }));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IT","CSSE","CSE","IM" }));
-        jTextField2.setEditable(false);
-//        jTextField4.setEditable(false);
+        showTags();
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lecture,","Tutorial,","Practical"}));
+        
     }
     
-    public void showStudents(){
+    public void showTags(){
         String students = "SELECT * FROM SLIIT.TAG";
             try{
 //                ps = con.createStatement();
@@ -63,18 +61,18 @@ public class Tags extends javax.swing.JFrame {
     }
     
     public class User{
-        public String academicYear;
-        public String program;
-        public String gNo;
-        public String sGno;
+        public String id;
+        public String tagType;
+        public String moduleName;
+        public String location;
         public String lecturer;
         
-        public User(String academicYear, String program, String gNo, String sGno,String lecturer)
+        public User(String id, String tagType, String moduleName, String location,String lecturer)
         {
-            this.academicYear= academicYear;
-            this.program = program;
-            this.gNo = gNo;
-            this.sGno = sGno;
+            this.id= id;
+            this.tagType = tagType;
+            this.moduleName = moduleName;
+            this.location = location;
             this.lecturer = lecturer;
         }
     }
@@ -88,10 +86,10 @@ public class Tags extends javax.swing.JFrame {
         Object rowData[] = new Object[5];
         for(int i = 0; i < list.size(); i++)
         {
-            rowData[0] = list.get(i).academicYear;
-            rowData[1] = list.get(i).program;
-            rowData[2] = list.get(i).gNo;
-            rowData[3] = list.get(i).sGno;
+            rowData[0] = list.get(i).id;
+            rowData[1] = list.get(i).tagType;
+            rowData[2] = list.get(i).moduleName;
+            rowData[3] = list.get(i).location;
             rowData[4] = list.get(i).lecturer;
             model.addRow(rowData);
         }
@@ -410,6 +408,11 @@ public class Tags extends javax.swing.JFrame {
         kButton2.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         kButton2.setkEndColor(new java.awt.Color(51, 51, 255));
         kButton2.setkStartColor(new java.awt.Color(255, 0, 255));
+        kButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setText("Module Name");
@@ -544,9 +547,69 @@ public class Tags extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        //validate data 
+        
+        String tagType = jComboBox1.getSelectedItem().toString();
+        String moduleName =jTextField1.getText(); 
+        String location = jTextField3.getText();
+        String lecturer = jTextField2.getText();
+        
+        
+        if(moduleName.length() == 0){
+            JOptionPane.showMessageDialog(null, "Enter a Modele Name", "Error", HEIGHT);
+        }else if(location.length() == 0){
+            JOptionPane.showMessageDialog(null, "Enter a Location", "Error", HEIGHT);
+        }else if(lecturer.length() == 0){
+            JOptionPane.showMessageDialog(null, "Enter a Lecturer", "Error", HEIGHT);
+        }else{
+               //add data to database
+               
+               
+               try{
+                        String sql = "INSERT INTO SLIIT.TAG (ID, TAGTYPE, MODULENAME, LOCATION, LECTURER) VALUES (?, ?, ?, ?, ?)";
+//                ps.setString(PROPERTIES, sql);
+                    ps = con.prepareStatement(sql);
+                    ps.setInt(1, autoIncrementTagId());
+                    ps.setString (2, tagType);
+                    ps.setString (3, moduleName);
+                    ps.setString (4, location);
+                    ps.setString (5, lecturer);
+                    boolean result = ps.execute();
+                    System.out.println(result);
+                    
+                    DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                    dtm.setRowCount(0);
+                    showTags();
+                    }catch(SQLException ex){
+                        System.out.println(ex);
+                    }
+        }
+    }//GEN-LAST:event_kButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
+    
+    public int autoIncrementTagId(){
+        String sql = "SELECT * FROM SLIIT.TAG ORDER BY id DESC";
+        
+        try{
+            Statement statement = con.createStatement();
+ 
+            ResultSet results = statement.executeQuery(sql);
+            results.next();
+            System.out.println(results.getInt("id")+1);
+            return results.getInt("id")+1;
+        }catch(SQLException ex){
+            
+        }
+        
+        return 1;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
