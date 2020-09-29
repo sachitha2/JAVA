@@ -14,14 +14,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author CHATA
  */
-public class Student extends javax.swing.JFrame {
+public class Tags extends javax.swing.JFrame {
     Connection con = JavaConnect.connectdb();
     PreparedStatement ps = null;
     ResultSet rs = null;
     /**
      * Creates new form Home
      */
-    public Student() {
+    public Tags() {
         initComponents();
         JavaConnect.connectdb();
         showStudents();
@@ -43,8 +43,8 @@ public class Student extends javax.swing.JFrame {
                 ResultSet results = statement.executeQuery(students);
                 
                     while(results.next()){
-                        ArrayList<Student.User> list = new ArrayList<Student.User>();
-                        Student.User u1 = new Student.User(results.getString("AYS"),results.getString("program"),results.getString("gid"),results.getString("sgid"));
+                        ArrayList<Tags.User> list = new ArrayList<Tags.User>();
+                        Tags.User u1 = new Tags.User(results.getString("AYS"),results.getString("program"),results.getString("gid"),results.getString("sgid"));
                         list.add(u1);
                         addRowToJTable(list);
                         
@@ -82,7 +82,7 @@ public class Student extends javax.swing.JFrame {
     
     
 // added rows from arraylist to jtable
-    public void addRowToJTable(ArrayList<Student.User> list)
+    public void addRowToJTable(ArrayList<Tags.User> list)
     {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 //        ArrayList<Student.User> list = ListUsers();
@@ -358,11 +358,6 @@ public class Student extends javax.swing.JFrame {
         jBtnTags.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jBtnTags.setForeground(new java.awt.Color(255, 255, 255));
         jBtnTags.setText("Tags");
-        jBtnTags.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnTagsActionPerformed(evt);
-            }
-        });
         kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 250, 60));
 
         kGradientPanel7.setkEndColor(new java.awt.Color(204, 204, 204));
@@ -370,7 +365,7 @@ public class Student extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel2.setText("Student");
+        jLabel2.setText("Tags");
 
         javax.swing.GroupLayout kGradientPanel7Layout = new javax.swing.GroupLayout(kGradientPanel7);
         kGradientPanel7.setLayout(kGradientPanel7Layout);
@@ -621,7 +616,9 @@ public class Student extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField8ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-                    
+        this.dispose();
+        Student std = new Student();
+        std.setVisible(true);
                     
                     
     }//GEN-LAST:event_jButton12ActionPerformed
@@ -644,26 +641,11 @@ public class Student extends javax.swing.JFrame {
                 
                 
             
-                
-                    try{
-                        String sql = "INSERT INTO SLIIT.STUDENT (GNO, AYS, PROGRAM, GID, SGNO, SGID) VALUES ('rcsdf', 'erfds', 'efsda', 'fdsa', 'fsda', 'fdeas')";
-//                ps.setString(PROPERTIES, sql);
-                    ps = con.prepareStatement(sql);
-                    boolean result = ps.execute();
-                    System.out.println(result);
-                    
-                    DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-                    dtm.setRowCount(0);
-                    showStudents();
-                    }catch(SQLException ex){
-                        System.out.println(ex);
-                    }
-                
-                
-                //inser part
-                // 
-                
-                 }
+                ArrayList<Tags.User> list = new ArrayList<Tags.User>();
+                Tags.User u1 = new Tags.User("test","test","tyest","test");
+                list.add(u1);
+                addRowToJTable(list);
+        }
         
         
         
@@ -713,13 +695,6 @@ public class Student extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jBtnTagsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTagsActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-        Tags tags = new Tags();
-        tags.setVisible(true);
-    }//GEN-LAST:event_jBtnTagsActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -737,27 +712,27 @@ public class Student extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Student.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tags.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Student.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tags.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Student.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tags.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Student.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Tags.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Student().setVisible(true);
+                new Tags().setVisible(true);
             }
         });
     }
 
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnTags;
     private javax.swing.JButton jButton10;

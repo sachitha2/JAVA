@@ -247,6 +247,11 @@ public class Home extends javax.swing.JFrame {
         jBtnTags.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jBtnTags.setForeground(new java.awt.Color(255, 255, 255));
         jBtnTags.setText("Tags");
+        jBtnTags.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnTagsActionPerformed(evt);
+            }
+        });
         kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 250, 60));
 
         kGradientPanel7.setkEndColor(new java.awt.Color(204, 204, 204));
@@ -311,6 +316,14 @@ public class Home extends javax.swing.JFrame {
         Student stu = new Student();
         stu.setVisible(true);
     }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jBtnTagsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTagsActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+        Tags tags = new Tags();
+        tags.setVisible(true);
+    }//GEN-LAST:event_jBtnTagsActionPerformed
 
     /**
      * @param args the command line arguments
