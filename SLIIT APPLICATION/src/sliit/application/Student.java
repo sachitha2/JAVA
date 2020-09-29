@@ -29,6 +29,7 @@ public class Student extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IT","CSSE","CSE","IM" }));
         jTextField2.setEditable(false);
         jTextField4.setEditable(false);
+        jTable1.setRowHeight(30);
     }
     
     public void showStudents(){
@@ -80,11 +81,11 @@ public class Student extends javax.swing.JFrame {
         }
     }
     
-    
+    DefaultTableModel model;
 // added rows from arraylist to jtable
     public void addRowToJTable(ArrayList<Student.User> list)
     {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model = (DefaultTableModel) jTable1.getModel();
 //        ArrayList<Student.User> list = ListUsers();
         Object rowData[] = new Object[4];
         for(int i = 0; i < list.size(); i++)
@@ -494,6 +495,11 @@ public class Student extends javax.swing.JFrame {
         kButton2.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         kButton2.setkEndColor(new java.awt.Color(204, 0, 51));
         kButton2.setkStartColor(new java.awt.Color(255, 102, 0));
+        kButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -743,6 +749,32 @@ public class Student extends javax.swing.JFrame {
         WorkingH w = new WorkingH();
         w.setVisible(true);
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
+        // TODO add your handling code here:
+//        System.out.println(jTable1.getSelectedRow());
+        int i = jTable1.getSelectedRow();
+        if(i >= 0){
+            //sql part here
+            model.removeRow(i);
+            
+            String subGId = (String) model.getValueAt(i, 3);
+            String sql = "DELETE FROM SLIIT.STUDENT WHERE SGID = ?";
+            
+            try{
+                ps = con.prepareStatement(sql);
+                ps.setString (1, subGId);
+                boolean result = ps.execute();
+                
+                showStudents();
+            }catch(SQLException e){
+                
+            }
+            
+        }else{
+            System.out.println("Delete error");
+        }
+    }//GEN-LAST:event_kButton2ActionPerformed
 
     /**
      * @param args the command line arguments

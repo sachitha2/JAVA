@@ -847,6 +847,9 @@
                   <Color blue="0" green="66" red="ff" type="rgb"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="kButton2ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

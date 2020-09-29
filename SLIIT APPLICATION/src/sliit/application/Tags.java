@@ -25,6 +25,7 @@ public class Tags extends javax.swing.JFrame {
         initComponents();
         JavaConnect.connectdb();
         showTags();
+        jTable1.setRowHeight(30);
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lecture,","Tutorial,","Practical"}));
         
     }
