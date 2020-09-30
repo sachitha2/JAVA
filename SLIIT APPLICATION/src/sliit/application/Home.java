@@ -249,6 +249,11 @@ public class Home extends javax.swing.JFrame {
         jButton16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton16.setForeground(new java.awt.Color(255, 255, 255));
         jButton16.setText("Not Overlap");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
         kGradientPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, 250, 60));
 
         jButton17.setBackground(new java.awt.Color(51, 0, 255));
@@ -380,6 +385,14 @@ public class Home extends javax.swing.JFrame {
         consecutiveSessions cs = new consecutiveSessions();
         cs.setVisible(true);
     }//GEN-LAST:event_jBtnTags2ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+        //this is not overlap
+        this.dispose();
+        NotOverLap nOl = new NotOverLap();
+        nOl.setVisible(true);
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     /**
      * @param args the command line arguments
