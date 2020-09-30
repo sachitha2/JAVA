@@ -490,6 +490,11 @@ public class Student extends javax.swing.JFrame {
         kButton6.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         kButton6.setkEndColor(new java.awt.Color(204, 0, 51));
         kButton6.setkStartColor(new java.awt.Color(255, 102, 0));
+        kButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kButton6ActionPerformed(evt);
+            }
+        });
 
         kButton2.setText("Delete");
         kButton2.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
@@ -764,7 +769,7 @@ public class Student extends javax.swing.JFrame {
         int i = jTable1.getSelectedRow();
         if(i >= 0){
             //sql part here
-            model.removeRow(i);
+            
             
             String subGId = (String) model.getValueAt(i, 3);
             String sql = "DELETE FROM SLIIT.STUDENT WHERE SGID = ?";
@@ -773,13 +778,15 @@ public class Student extends javax.swing.JFrame {
                 ps = con.prepareStatement(sql);
                 ps.setString (1, subGId);
                 boolean result = ps.execute();
-                
+                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                dtm.setRowCount(0);
                 showStudents();
             }catch(SQLException e){
-                
+                JOptionPane.showMessageDialog(null, e, "ERROR", HEIGHT);
             }
             
         }else{
+            JOptionPane.showMessageDialog(null, "Select a row to delete", "ERROR", HEIGHT);
             System.out.println("Delete error");
         }
     }//GEN-LAST:event_kButton2ActionPerformed
@@ -790,6 +797,10 @@ public class Student extends javax.swing.JFrame {
             int i = jTable1.getSelectedRow();
             jTextField2.setText(jTable1.getValueAt(i,0).toString());
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void kButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kButton6ActionPerformed
 
     /**
      * @param args the command line arguments
