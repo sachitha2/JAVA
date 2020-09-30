@@ -256,6 +256,8 @@ public class WorkingH extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
         jBtnTags = new javax.swing.JButton();
+        jBtnTags2 = new javax.swing.JButton();
+        jBtnTags1 = new javax.swing.JButton();
         kGradientPanel7 = new keeptoo.KGradientPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -356,6 +358,11 @@ public class WorkingH extends javax.swing.JFrame {
         jButton15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
         jButton15.setText("Not available Times");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
         kGradientPanel2.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -487,6 +494,11 @@ public class WorkingH extends javax.swing.JFrame {
         jButton16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton16.setForeground(new java.awt.Color(255, 255, 255));
         jButton16.setText("Not Overlap");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
         kGradientPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 250, 60));
 
         jButton17.setBackground(new java.awt.Color(51, 0, 255));
@@ -505,6 +517,28 @@ public class WorkingH extends javax.swing.JFrame {
             }
         });
         kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 250, 60));
+
+        jBtnTags2.setBackground(new java.awt.Color(51, 0, 255));
+        jBtnTags2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jBtnTags2.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnTags2.setText("Consecutive Sessions");
+        jBtnTags2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnTags2ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(jBtnTags2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 840, 250, 60));
+
+        jBtnTags1.setBackground(new java.awt.Color(51, 0, 255));
+        jBtnTags1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jBtnTags1.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnTags1.setText("Parallel Sessions");
+        jBtnTags1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnTags1ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(jBtnTags1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 910, 250, 60));
 
         kGradientPanel7.setkEndColor(new java.awt.Color(204, 204, 204));
         kGradientPanel7.setkStartColor(new java.awt.Color(204, 204, 204));
@@ -822,6 +856,38 @@ public class WorkingH extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxToActionPerformed
 
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        WorkingH w = new WorkingH();
+        w.setVisible(true);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jBtnTags2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTags2ActionPerformed
+        // TODO add your handling code here:
+        //this is consseccetive sessions button
+        this.dispose();
+        consecutiveSessions cs = new consecutiveSessions();
+        cs.setVisible(true);
+    }//GEN-LAST:event_jBtnTags2ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+        //not over lap
+        this.dispose();
+        NotOverLap nOl = new NotOverLap();
+        nOl.setVisible(true);
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jBtnTags1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTags1ActionPerformed
+        // TODO add your handling code here:
+
+        this.dispose();
+        ParallelS ps = new ParallelS();
+        ps.setVisible(true);
+
+    }//GEN-LAST:event_jBtnTags1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -864,6 +930,8 @@ public class WorkingH extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnTags;
+    private javax.swing.JButton jBtnTags1;
+    private javax.swing.JButton jBtnTags2;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
