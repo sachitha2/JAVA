@@ -39,7 +39,7 @@ public class ParallelS extends javax.swing.JFrame {
             System.out.println("Data not available");
             //add data to the database
             try{
-                        String sql = "INSERT INTO SLIIT.NOTOVERLAP (OFOR, MODULE) VALUES (?, ?)";
+                        String sql = "INSERT INTO SLIIT.PARALLELS (OFOR, MODULE) VALUES (?, ?)";
 //                ps.setString(PROPERTIES, sql);
                     ps = con.prepareStatement(sql);
                     ps.setString (1, nfor);
@@ -61,7 +61,7 @@ public class ParallelS extends javax.swing.JFrame {
     }
     
     public boolean checkDataAvailable(String ofor,String module){
-        String sql = "SELECT * FROM SLIIT.NOTOVERLAP WHERE OFOR = '"+ofor+"' AND MODULE = '"+module+"'";
+        String sql = "SELECT * FROM SLIIT.PARALLELS WHERE OFOR = '"+ofor+"' AND MODULE = '"+module+"'";
         try{
             Statement statement = con.createStatement();
  
@@ -128,13 +128,15 @@ public class ParallelS extends javax.swing.JFrame {
     
     
     public class NotAvailableModel{
-        public String nFor;
-        public String module;
+        public String day;
+        public String dur;
+        public String psid;
         
-        public NotAvailableModel(String nFor, String module)
+        public NotAvailableModel(String day, String dur,String psid)
         {
-            this.nFor= nFor;
-            this.module = module;
+            this.day= day;
+            this.dur = dur;
+            this.psid = psid;
         }
     }
     
@@ -144,11 +146,12 @@ public class ParallelS extends javax.swing.JFrame {
     {
         model = (DefaultTableModel) jTable1.getModel();
 //        ArrayList<Student.User> list = ListUsers();
-        Object rowData[] = new Object[6];
+        Object rowData[] = new Object[3];
         for(int i = 0; i < list.size(); i++)
         {
-            rowData[0] = list.get(i).nFor;
-            rowData[1] = list.get(i).module;
+            rowData[0] = list.get(i).day;
+            rowData[1] = list.get(i).dur;
+            rowData[2] = list.get(i).psid;
             model.addRow(rowData);
         }
                 
@@ -157,7 +160,7 @@ public class ParallelS extends javax.swing.JFrame {
     
 
  public void showNotOverLapTable(){
-        String students = "SELECT * FROM SLIIT.NOTOVERLAP";
+        String students = "SELECT * FROM SLIIT.PARALLELS";
             try{
 //                ps = con.createStatement();
 //                //            ps.setString(1,gettext cne eka);
@@ -169,7 +172,7 @@ public class ParallelS extends javax.swing.JFrame {
                 
                     while(results.next()){
                         ArrayList<ParallelS.NotAvailableModel> list = new ArrayList<ParallelS.NotAvailableModel>();
-                        ParallelS.NotAvailableModel u1 = new ParallelS.NotAvailableModel(results.getString("OFOR"),results.getString("MODULE"));
+                        ParallelS.NotAvailableModel u1 = new ParallelS.NotAvailableModel(results.getString("DAY"),results.getString("DUr"),results.getString("PSID"));
                         list.add(u1);
                         addRowToJTable(list);
                         
@@ -478,7 +481,7 @@ public class ParallelS extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel2.setText("Modules not overlap");
+        jLabel2.setText("parallel sessions");
 
         javax.swing.GroupLayout kGradientPanel7Layout = new javax.swing.GroupLayout(kGradientPanel7);
         kGradientPanel7.setLayout(kGradientPanel7Layout);
@@ -534,7 +537,7 @@ public class ParallelS extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 0, 102));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Modules not overlap");
+        jLabel9.setText("parallel sessions");
 
         kButtonDelete.setText("Delete");
         kButtonDelete.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
@@ -581,8 +584,7 @@ public class ParallelS extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBoxNotAvailableType, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jComboBoxNotAvailableType, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldModule, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -612,7 +614,7 @@ public class ParallelS extends javax.swing.JFrame {
 
             },
             new String [] {
-                "For", "Module"
+                "DAY", "Duration", "parallel session ID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
