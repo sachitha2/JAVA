@@ -789,14 +789,16 @@ public class consecutiveSessions extends javax.swing.JFrame {
                     //sql part here
                     String CST = (String) model.getValueAt(i, 0);
                     String CSF = (String) model.getValueAt(i, 1);
+                    String MODULE = (String) model.getValueAt(i, 2);
                     
-                    String sql = "DELETE FROM SLIIT.CONSECUTIVE_SESSION WHERE CST = ? AND CSF = ?";
+                    String sql = "DELETE FROM SLIIT.CONSECUTIVE_SESSION WHERE CST = ? AND CSF = ? AND MODULE = ?";
                     System.out.println(sql);
 
                     try{
                         ps = con.prepareStatement(sql);
                         ps.setString (1, CST);
                         ps.setString (2, CSF);
+                        ps.setString (3, MODULE);
                         boolean result = ps.execute();
                         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                         dtm.setRowCount(0);
