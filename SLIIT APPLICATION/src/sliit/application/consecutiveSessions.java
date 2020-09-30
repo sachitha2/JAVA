@@ -33,19 +33,21 @@ public class consecutiveSessions extends javax.swing.JFrame {
         String Day;
         String From;
         String to;
+        String module;
         JavaConnect.connectdb();
         NAT = jComboBoxNotAvailableType.getSelectedItem().toString();
         NATF = jComboBoxNotAvailableFor.getSelectedItem().toString();
         Day = jComboBoxDay.getSelectedItem().toString();
         From = jComboBoxForm.getSelectedItem().toString();
         to = jComboBoxTo.getSelectedItem().toString();
+        module = jTextFieldModule.getText().toString();
         
         //checck data availability
-        if(checkDataAvailable(NAT,NATF)){
+        if(checkDataAvailable(NAT,NATF,module)){
             System.out.println("Data not available");
             //add data to the database
             try{
-                        String sql = "INSERT INTO SLIIT.CONSECUTIVE_SESSION (CST, CSF, CDAY, CFROM, CTO) VALUES (?, ?, ?, ?, ?)";
+                        String sql = "INSERT INTO SLIIT.CONSECUTIVE_SESSION (CST, CSF, CDAY, CFROM, CTO,MODULE) VALUES (?, ?, ?, ?, ?,?)";
 //                ps.setString(PROPERTIES, sql);
                     ps = con.prepareStatement(sql);
                     ps.setString (1, NAT);
@@ -53,6 +55,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
                     ps.setString (3, Day);
                     ps.setString (4, From);
                     ps.setString (5, to);
+                    ps.setString(6, module);
                     boolean result = ps.execute();
                     System.out.println(result);
                     
@@ -69,8 +72,8 @@ public class consecutiveSessions extends javax.swing.JFrame {
         }
     }
     
-    public boolean checkDataAvailable(String CST,String CSF){
-        String sql = "SELECT * FROM SLIIT.CONSECUTIVE_SESSION WHERE CST = '"+CST+"' AND CSF = '"+CSF+"'";
+    public boolean checkDataAvailable(String CST,String CSF,String module){
+        String sql = "SELECT * FROM SLIIT.CONSECUTIVE_SESSION WHERE CST = '"+CST+"' AND CSF = '"+CSF+"' AND MODULE = '"+module+"'";
         try{
             Statement statement = con.createStatement();
  
@@ -102,10 +105,9 @@ public class consecutiveSessions extends javax.swing.JFrame {
         jComboBoxNotAvailableType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lecture","Tutorial"}));
         jComboBoxDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" }));
         jComboBoxNotAvailableFor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y1.S1", "Y1.S2","Y2.S1","Y2.S2","Y3.S1","Y3.S2","Y4.S1","Y4.S2" }));
-        
         //times array
         showNotWorkingTable();
-        jTable1.setRowHeight(30);
+        jTable1.setRowHeight(40);
        ArrayList<String> arr = new ArrayList<String>();
 
         int i, j;
@@ -147,14 +149,16 @@ public class consecutiveSessions extends javax.swing.JFrame {
         public String DAY;
         public String FROM;
         public String TTO;
+        public String MODULE;
         
-        public NotAvailableModel(String NAT, String NATF, String DAY, String FROM, String TTO)
+        public NotAvailableModel(String NAT, String NATF, String DAY, String FROM, String TTO,String MODULE)
         {
             this.NAT= NAT;
             this.NATF = NATF;
             this.DAY = DAY;
             this.FROM = FROM;
             this.TTO = TTO;
+            this.MODULE = MODULE;
         }
     }
     
@@ -164,7 +168,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
     {
         model = (DefaultTableModel) jTable1.getModel();
 //        ArrayList<Student.User> list = ListUsers();
-        Object rowData[] = new Object[5];
+        Object rowData[] = new Object[6];
         for(int i = 0; i < list.size(); i++)
         {
             rowData[0] = list.get(i).NAT;
@@ -172,6 +176,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
             rowData[2] = list.get(i).DAY;
             rowData[3] = list.get(i).FROM;
             rowData[4] = list.get(i).TTO;
+            rowData[5] = list.get(i).MODULE;
             model.addRow(rowData);
         }
                 
@@ -192,7 +197,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
                 
                     while(results.next()){
                         ArrayList<consecutiveSessions.NotAvailableModel> list = new ArrayList<consecutiveSessions.NotAvailableModel>();
-                        consecutiveSessions.NotAvailableModel u1 = new consecutiveSessions.NotAvailableModel(results.getString("CST"),results.getString("CSF"),results.getString("CDAY"),results.getString("CFROM"),results.getString("CTO"));
+                        consecutiveSessions.NotAvailableModel u1 = new consecutiveSessions.NotAvailableModel(results.getString("CST"),results.getString("CSF"),results.getString("MODULE"),results.getString("CDAY"),results.getString("CFROM"),results.getString("CTO"));
                         list.add(u1);
                         addRowToJTable(list);
                         
@@ -267,6 +272,8 @@ public class consecutiveSessions extends javax.swing.JFrame {
         jComboBoxDay = new javax.swing.JComboBox<>();
         jComboBoxForm = new javax.swing.JComboBox<>();
         jComboBoxTo = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        jTextFieldModule = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -549,7 +556,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel12.setText("consecutive sessions for");
+        jLabel12.setText("Module");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText("Day");
@@ -607,10 +614,19 @@ public class consecutiveSessions extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel14.setText("consecutive sessions for");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addComponent(kButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(214, 214, 214))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -618,26 +634,30 @@ public class consecutiveSessions extends javax.swing.JFrame {
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxNotAvailableType, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxNotAvailableFor, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxForm, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxTo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(kButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(214, 214, 214))
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldModule, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxNotAvailableFor, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(312, 312, 312))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -648,11 +668,15 @@ public class consecutiveSessions extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxNotAvailableType, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxNotAvailableFor, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(86, 86, 86)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldModule, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -689,7 +713,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
 
             },
             new String [] {
-                "consecutive sessions type", "For", "Day", "From", "To"
+                "consecutive sessions type", "For", "Module", "Day", "From", "To"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -867,6 +891,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -890,6 +915,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldModule;
     private keeptoo.KButton kButton2;
     private keeptoo.KButton kButton4;
     private keeptoo.KButton kButtonDelete;
