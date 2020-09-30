@@ -53,7 +53,7 @@ public class NotOverLap extends javax.swing.JFrame {
                     
                     DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                     dtm.setRowCount(0);
-                    showNotWorkingTable();
+                    showNotOverLapTable();
                     }catch(SQLException ex){
                         System.out.println(ex);
                     }
@@ -96,7 +96,7 @@ public class NotOverLap extends javax.swing.JFrame {
         JavaConnect.connectdb();
         jComboBoxNotAvailableType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lecture","Tutorial"}));
         //times array
-        showNotWorkingTable();
+        showNotOverLapTable();
         jTable1.setRowHeight(40);
        ArrayList<String> arr = new ArrayList<String>();
 
@@ -132,21 +132,13 @@ public class NotOverLap extends javax.swing.JFrame {
     
     
     public class NotAvailableModel{
-        public String NAT;
-        public String NATF;
-        public String DAY;
-        public String FROM;
-        public String TTO;
-        public String MODULE;
+        public String nFor;
+        public String module;
         
-        public NotAvailableModel(String NAT, String NATF, String DAY, String FROM, String TTO,String MODULE)
+        public NotAvailableModel(String nFor, String module)
         {
-            this.NAT= NAT;
-            this.NATF = NATF;
-            this.DAY = DAY;
-            this.FROM = FROM;
-            this.TTO = TTO;
-            this.MODULE = MODULE;
+            this.nFor= nFor;
+            this.module = module;
         }
     }
     
@@ -159,12 +151,8 @@ public class NotOverLap extends javax.swing.JFrame {
         Object rowData[] = new Object[6];
         for(int i = 0; i < list.size(); i++)
         {
-            rowData[0] = list.get(i).NAT;
-            rowData[1] = list.get(i).NATF;
-            rowData[2] = list.get(i).DAY;
-            rowData[3] = list.get(i).FROM;
-            rowData[4] = list.get(i).TTO;
-            rowData[5] = list.get(i).MODULE;
+            rowData[0] = list.get(i).nFor;
+            rowData[1] = list.get(i).module;
             model.addRow(rowData);
         }
                 
@@ -172,8 +160,8 @@ public class NotOverLap extends javax.swing.JFrame {
     
     
 
- public void showNotWorkingTable(){
-        String students = "SELECT * FROM SLIIT.CONSECUTIVE_SESSION";
+ public void showNotOverLapTable(){
+        String students = "SELECT * FROM SLIIT.NOTOVERLAP";
             try{
 //                ps = con.createStatement();
 //                //            ps.setString(1,gettext cne eka);
@@ -185,7 +173,7 @@ public class NotOverLap extends javax.swing.JFrame {
                 
                     while(results.next()){
                         ArrayList<NotOverLap.NotAvailableModel> list = new ArrayList<NotOverLap.NotAvailableModel>();
-                        NotOverLap.NotAvailableModel u1 = new NotOverLap.NotAvailableModel(results.getString("CST"),results.getString("CSF"),results.getString("MODULE"),results.getString("CDAY"),results.getString("CFROM"),results.getString("CTO"));
+                        NotOverLap.NotAvailableModel u1 = new NotOverLap.NotAvailableModel(results.getString("OFOR"),results.getString("MODULE"));
                         list.add(u1);
                         addRowToJTable(list);
                         
@@ -716,7 +704,7 @@ public class NotOverLap extends javax.swing.JFrame {
                         boolean result = ps.execute();
                         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                         dtm.setRowCount(0);
-                        showNotWorkingTable();
+                        showNotOverLapTable();
                     }catch(SQLException e){
                         JOptionPane.showMessageDialog(null, e, "Delete error", HEIGHT);
                     }
