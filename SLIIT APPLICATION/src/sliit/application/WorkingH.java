@@ -28,6 +28,7 @@ public class WorkingH extends javax.swing.JFrame {
         JavaConnect.connectdb();
         jComboBoxNotAvailableType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lecture,","Tutorial,","Practical"}));
         jComboBoxDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" }));
+        jComboBoxNotAvailableFor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y1.S1", "Y1.S2","Y2.S1","Y2.S2","Y3.S1","Y3.S2","Y4.S1","Y4.S2" }));
         
         //times array
         
