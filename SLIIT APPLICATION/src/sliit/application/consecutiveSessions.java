@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author CHATA
  */
-public class WorkingH extends javax.swing.JFrame {
+public class consecutiveSessions extends javax.swing.JFrame {
     Connection con = JavaConnect.connectdb();
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -45,7 +45,7 @@ public class WorkingH extends javax.swing.JFrame {
             System.out.println("Data not available");
             //add data to the database
             try{
-                        String sql = "INSERT INTO SLIIT.NOTAVAILABLETIMES (NAT, NATF, NDAY, TFROM, TTO) VALUES (?, ?, ?, ?, ?)";
+                        String sql = "INSERT INTO SLIIT.CONSECUTIVE_SESSION (CST, CSF, CDAY, CFROM, CTO) VALUES (?, ?, ?, ?, ?)";
 //                ps.setString(PROPERTIES, sql);
                     ps = con.prepareStatement(sql);
                     ps.setString (1, NAT);
@@ -69,8 +69,8 @@ public class WorkingH extends javax.swing.JFrame {
         }
     }
     
-    public boolean checkDataAvailable(String NAT,String NATF){
-        String sql = "SELECT * FROM SLIIT.NOTAVAILABLETIMES WHERE NAT = '"+NAT+"' AND NATF = '"+NATF+"'";
+    public boolean checkDataAvailable(String CST,String CSF){
+        String sql = "SELECT * FROM SLIIT.CONSECUTIVE_SESSION WHERE CST = '"+CST+"' AND CSF = '"+CSF+"'";
         try{
             Statement statement = con.createStatement();
  
@@ -92,14 +92,14 @@ public class WorkingH extends javax.swing.JFrame {
     }
     
     
-    public WorkingH() {
+    public consecutiveSessions() {
         initComponents();
         GraphicsEnvironment env =GraphicsEnvironment.getLocalGraphicsEnvironment();
         this.setMaximizedBounds(env.getMaximumWindowBounds());
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         JFrame.setDefaultLookAndFeelDecorated(true);
         JavaConnect.connectdb();
-        jComboBoxNotAvailableType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lecture","sessions","groups","sub-groups"}));
+        jComboBoxNotAvailableType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lecture","Tutorial"}));
         jComboBoxDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" }));
         jComboBoxNotAvailableFor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y1.S1", "Y1.S2","Y2.S1","Y2.S2","Y3.S1","Y3.S2","Y4.S1","Y4.S2" }));
         
@@ -160,7 +160,7 @@ public class WorkingH extends javax.swing.JFrame {
     
     DefaultTableModel model;
 // added rows from arraylist to jtable
-    public void addRowToJTable(ArrayList<WorkingH.NotAvailableModel> list)
+    public void addRowToJTable(ArrayList<consecutiveSessions.NotAvailableModel> list)
     {
         model = (DefaultTableModel) jTable1.getModel();
 //        ArrayList<Student.User> list = ListUsers();
@@ -180,7 +180,7 @@ public class WorkingH extends javax.swing.JFrame {
     
 
  public void showNotWorkingTable(){
-        String students = "SELECT * FROM SLIIT.NOTAVAILABLETIMES";
+        String students = "SELECT * FROM SLIIT.CONSECUTIVE_SESSION";
             try{
 //                ps = con.createStatement();
 //                //            ps.setString(1,gettext cne eka);
@@ -191,8 +191,8 @@ public class WorkingH extends javax.swing.JFrame {
                 ResultSet results = statement.executeQuery(students);
                 
                     while(results.next()){
-                        ArrayList<WorkingH.NotAvailableModel> list = new ArrayList<WorkingH.NotAvailableModel>();
-                        WorkingH.NotAvailableModel u1 = new WorkingH.NotAvailableModel(results.getString("NAT"),results.getString("NATF"),results.getString("NDAY"),results.getString("TFROM"),results.getString("TTO"));
+                        ArrayList<consecutiveSessions.NotAvailableModel> list = new ArrayList<consecutiveSessions.NotAvailableModel>();
+                        consecutiveSessions.NotAvailableModel u1 = new consecutiveSessions.NotAvailableModel(results.getString("CST"),results.getString("CSF"),results.getString("CDAY"),results.getString("CFROM"),results.getString("CTO"));
                         list.add(u1);
                         addRowToJTable(list);
                         
@@ -502,7 +502,7 @@ public class WorkingH extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 102));
-        jLabel2.setText("Not available Times");
+        jLabel2.setText("consecutive sessions");
 
         javax.swing.GroupLayout kGradientPanel7Layout = new javax.swing.GroupLayout(kGradientPanel7);
         kGradientPanel7.setLayout(kGradientPanel7Layout);
@@ -510,7 +510,7 @@ public class WorkingH extends javax.swing.JFrame {
             kGradientPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel7Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
@@ -533,7 +533,7 @@ public class WorkingH extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Not Available Type");
+        jLabel4.setText("consecutive sessions type");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("To");
@@ -549,7 +549,7 @@ public class WorkingH extends javax.swing.JFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel12.setText("Not Available time For");
+        jLabel12.setText("consecutive sessions for");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText("Day");
@@ -567,7 +567,7 @@ public class WorkingH extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 0, 102));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("Not available Times");
+        jLabel9.setText("consecutive sessions");
 
         kButtonDelete.setText("Delete");
         kButtonDelete.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
@@ -689,7 +689,7 @@ public class WorkingH extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Not Available Time", "For", "Day", "From", "To"
+                "consecutive sessions type", "For", "Day", "From", "To"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -763,16 +763,16 @@ public class WorkingH extends javax.swing.JFrame {
                 int i = jTable1.getSelectedRow();
                 if(i >= 0){
                     //sql part here
-                    String NAT = (String) model.getValueAt(i, 0);
-                    String NATF = (String) model.getValueAt(i, 1);
+                    String CST = (String) model.getValueAt(i, 0);
+                    String CSF = (String) model.getValueAt(i, 1);
                     
-                    String sql = "DELETE FROM SLIIT.NOTAVAILABLETIMES WHERE NAT = ? AND NATF = ?";
+                    String sql = "DELETE FROM SLIIT.CONSECUTIVE_SESSION WHERE CST = ? AND CSF = ?";
                     System.out.println(sql);
 
                     try{
                         ps = con.prepareStatement(sql);
-                        ps.setString (1, NAT);
-                        ps.setString (2, NATF);
+                        ps.setString (1, CST);
+                        ps.setString (2, CSF);
                         boolean result = ps.execute();
                         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                         dtm.setRowCount(0);
@@ -820,14 +820,18 @@ public class WorkingH extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WorkingH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consecutiveSessions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WorkingH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consecutiveSessions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WorkingH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consecutiveSessions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WorkingH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consecutiveSessions.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -836,7 +840,7 @@ public class WorkingH extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WorkingH().setVisible(true);
+                new consecutiveSessions().setVisible(true);
             }
         });
     }

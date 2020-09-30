@@ -375,6 +375,10 @@ public class Home extends javax.swing.JFrame {
 
     private void jBtnTags2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTags2ActionPerformed
         // TODO add your handling code here:
+        //this is consseccetive sessions button
+        this.dispose();
+        consecutiveSessions cs = new consecutiveSessions();
+        cs.setVisible(true);
     }//GEN-LAST:event_jBtnTags2ActionPerformed
 
     /**
