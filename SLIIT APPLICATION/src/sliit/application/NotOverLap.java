@@ -685,18 +685,16 @@ public class NotOverLap extends javax.swing.JFrame {
                 int i = jTable1.getSelectedRow();
                 if(i >= 0){
                     //sql part here
-                    String CST = (String) model.getValueAt(i, 0);
-                    String CSF = (String) model.getValueAt(i, 1);
-                    String MODULE = (String) model.getValueAt(i, 2);
+                    String nfor = (String) model.getValueAt(i, 0);
+                    String MODULE = (String) model.getValueAt(i, 1);
                     
-                    String sql = "DELETE FROM SLIIT.CONSECUTIVE_SESSION WHERE CST = ? AND CSF = ? AND MODULE = ?";
+                    String sql = "DELETE FROM SLIIT.NOTOVERLAP WHERE OFOR = ?  AND MODULE = ?";
                     System.out.println(sql);
 
                     try{
                         ps = con.prepareStatement(sql);
-                        ps.setString (1, CST);
-                        ps.setString (2, CSF);
-                        ps.setString (3, MODULE);
+                        ps.setString (1, nfor);
+                        ps.setString (2, MODULE);
                         boolean result = ps.execute();
                         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                         dtm.setRowCount(0);
