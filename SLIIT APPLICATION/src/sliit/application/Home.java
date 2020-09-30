@@ -5,6 +5,9 @@
  */
 package sliit.application;
 
+import java.awt.GraphicsEnvironment;
+import javax.swing.JFrame;
+
 /**
  *
  * @author CHATA
@@ -16,6 +19,10 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        GraphicsEnvironment env =GraphicsEnvironment.getLocalGraphicsEnvironment();
+        this.setMaximizedBounds(env.getMaximumWindowBounds());
+        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
+        JFrame.setDefaultLookAndFeelDecorated(true);
     }
 
     /**
@@ -51,6 +58,8 @@ public class Home extends javax.swing.JFrame {
         jButton16 = new javax.swing.JButton();
         jButton17 = new javax.swing.JButton();
         jBtnTags = new javax.swing.JButton();
+        jBtnTags1 = new javax.swing.JButton();
+        jBtnTags2 = new javax.swing.JButton();
         kGradientPanel7 = new keeptoo.KGradientPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -68,7 +77,7 @@ public class Home extends javax.swing.JFrame {
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton8.setForeground(new java.awt.Color(255, 255, 255));
         jButton8.setText("  Timetables");
-        kGradientPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 250, 60));
+        kGradientPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 250, 60));
         kGradientPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jButton11.setBackground(new java.awt.Color(204, 51, 255));
@@ -103,7 +112,7 @@ public class Home extends javax.swing.JFrame {
         jButton15.setBackground(new java.awt.Color(102, 0, 255));
         jButton15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
-        jButton15.setText("Working hours");
+        jButton15.setText("Not available Times");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
@@ -239,25 +248,47 @@ public class Home extends javax.swing.JFrame {
         jButton16.setBackground(new java.awt.Color(51, 0, 255));
         jButton16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton16.setForeground(new java.awt.Color(255, 255, 255));
-        jButton16.setText("   Rooms");
-        kGradientPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 250, 60));
+        jButton16.setText("Not Overlap");
+        kGradientPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 680, 250, 60));
 
         jButton17.setBackground(new java.awt.Color(51, 0, 255));
         jButton17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton17.setForeground(new java.awt.Color(255, 255, 255));
         jButton17.setText("   Statics");
-        kGradientPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 250, 60));
+        kGradientPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 250, 60));
 
         jBtnTags.setBackground(new java.awt.Color(51, 0, 255));
         jBtnTags.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jBtnTags.setForeground(new java.awt.Color(255, 255, 255));
-        jBtnTags.setText("Tags");
+        jBtnTags.setText("Parallel Sessions");
         jBtnTags.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnTagsActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 250, 60));
+        kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 890, 250, 60));
+
+        jBtnTags1.setBackground(new java.awt.Color(51, 0, 255));
+        jBtnTags1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jBtnTags1.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnTags1.setText("Tags");
+        jBtnTags1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnTags1ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(jBtnTags1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 750, 250, 60));
+
+        jBtnTags2.setBackground(new java.awt.Color(51, 0, 255));
+        jBtnTags2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jBtnTags2.setForeground(new java.awt.Color(255, 255, 255));
+        jBtnTags2.setText("Consecutive Sessions");
+        jBtnTags2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnTags2ActionPerformed(evt);
+            }
+        });
+        kGradientPanel2.add(jBtnTags2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 820, 250, 60));
 
         kGradientPanel7.setkEndColor(new java.awt.Color(204, 204, 204));
         kGradientPanel7.setkStartColor(new java.awt.Color(204, 204, 204));
@@ -273,7 +304,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel7Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 803, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 974, Short.MAX_VALUE)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -293,15 +324,15 @@ public class Home extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(kGradientPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 1221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(kGradientPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1392, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
+            .addComponent(kGradientPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(kGradientPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 877, Short.MAX_VALUE))
         );
 
         pack();
@@ -325,9 +356,7 @@ public class Home extends javax.swing.JFrame {
     private void jBtnTagsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTagsActionPerformed
         // TODO add your handling code here:
         
-        this.dispose();
-        Tags tags = new Tags();
-        tags.setVisible(true);
+        
     }//GEN-LAST:event_jBtnTagsActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
@@ -335,6 +364,18 @@ public class Home extends javax.swing.JFrame {
         WorkingH w = new WorkingH();
         w.setVisible(true);
     }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jBtnTags1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTags1ActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+        Tags tags = new Tags();
+        tags.setVisible(true);
+    }//GEN-LAST:event_jBtnTags1ActionPerformed
+
+    private void jBtnTags2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTags2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnTags2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,6 +414,8 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnTags;
+    private javax.swing.JButton jBtnTags1;
+    private javax.swing.JButton jBtnTags2;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;

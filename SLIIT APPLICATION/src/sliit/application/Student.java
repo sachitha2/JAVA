@@ -5,8 +5,10 @@
  */
 package sliit.application;
 
+import java.awt.GraphicsEnvironment;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +25,10 @@ public class Student extends javax.swing.JFrame {
      */
     public Student() {
         initComponents();
+        GraphicsEnvironment env =GraphicsEnvironment.getLocalGraphicsEnvironment();
+        this.setMaximizedBounds(env.getMaximumWindowBounds());
+        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
+        JFrame.setDefaultLookAndFeelDecorated(true);
         JavaConnect.connectdb();
         showStudents();
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y1.S1", "Y1.S2","Y2.S1","Y2.S2","Y3.S1","Y3.S2","Y4.S1","Y4.S2" }));
@@ -215,7 +221,7 @@ public class Student extends javax.swing.JFrame {
         jButton15.setBackground(new java.awt.Color(102, 0, 255));
         jButton15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
-        jButton15.setText("Working hours");
+        jButton15.setText("Not available Times");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
@@ -351,7 +357,7 @@ public class Student extends javax.swing.JFrame {
         jButton16.setBackground(new java.awt.Color(51, 0, 255));
         jButton16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton16.setForeground(new java.awt.Color(255, 255, 255));
-        jButton16.setText("   Rooms");
+        jButton16.setText("Not Overlap");
         kGradientPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 250, 60));
 
         jButton17.setBackground(new java.awt.Color(51, 0, 255));

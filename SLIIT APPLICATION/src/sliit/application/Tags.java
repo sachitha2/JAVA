@@ -5,8 +5,10 @@
  */
 package sliit.application;
 
+import java.awt.GraphicsEnvironment;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +26,10 @@ public class Tags extends javax.swing.JFrame {
      */
     public Tags() {
         initComponents();
+        GraphicsEnvironment env =GraphicsEnvironment.getLocalGraphicsEnvironment();
+        this.setMaximizedBounds(env.getMaximumWindowBounds());
+        this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
+        JFrame.setDefaultLookAndFeelDecorated(true);
         JavaConnect.connectdb();
         showTags();
         jTable1.setRowHeight(30);
@@ -199,7 +205,7 @@ public class Tags extends javax.swing.JFrame {
         jButton15.setBackground(new java.awt.Color(102, 0, 255));
         jButton15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
-        jButton15.setText("Working hours");
+        jButton15.setText("Not available Times");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
