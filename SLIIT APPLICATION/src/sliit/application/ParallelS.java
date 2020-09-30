@@ -28,22 +28,25 @@ public class ParallelS extends javax.swing.JFrame {
     
     
     public void addDataToTable(){
-        String nfor;
-        String module;
+        String day;
+        String dur;
+        String psid;
         JavaConnect.connectdb();
-        nfor = jComboBoxNotAvailableType.getSelectedItem().toString();
-        module = jTextFieldModule.getText().toString();
+        day = jComboBoxDay.getSelectedItem().toString();
+        dur = jTextFieldDuration.getText().toString();
+        psid = jTextFieldpsid.getText().toString();
         
         //checck data availability
-        if(checkDataAvailable(nfor,module)){
+        if(checkDataAvailable(day,dur,psid)){
             System.out.println("Data not available");
             //add data to the database
             try{
-                        String sql = "INSERT INTO SLIIT.PARALLELS (OFOR, MODULE) VALUES (?, ?)";
+                        String sql = "INSERT INTO SLIIT.PARALLELS (DAY, DUR,PSID) VALUES (?, ?, ?)";
 //                ps.setString(PROPERTIES, sql);
                     ps = con.prepareStatement(sql);
-                    ps.setString (1, nfor);
-                    ps.setString(2, module);
+                    ps.setString (1, day);
+                    ps.setString(2, dur);
+                    ps.setString(3, psid);
                     boolean result = ps.execute();
                     System.out.println(result);
                     
@@ -60,8 +63,8 @@ public class ParallelS extends javax.swing.JFrame {
         }
     }
     
-    public boolean checkDataAvailable(String ofor,String module){
-        String sql = "SELECT * FROM SLIIT.PARALLELS WHERE OFOR = '"+ofor+"' AND MODULE = '"+module+"'";
+    public boolean checkDataAvailable(String day,String dur,String psid){
+        String sql = "SELECT * FROM SLIIT.PARALLELS WHERE day = '"+day+"' AND dur = '"+dur+"'   AND psid = '"+psid+"'";
         try{
             Statement statement = con.createStatement();
  
@@ -90,7 +93,7 @@ public class ParallelS extends javax.swing.JFrame {
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         JFrame.setDefaultLookAndFeelDecorated(true);
         JavaConnect.connectdb();
-        jComboBoxNotAvailableType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y1.S1", "Y1.S2","Y2.S1","Y2.S2","Y3.S1","Y3.S2","Y4.S1","Y4.S2" }));
+        jComboBoxDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y1.S1", "Y1.S2","Y2.S1","Y2.S2","Y3.S1","Y3.S2","Y4.S1","Y4.S2" }));
         //times array
         showNotOverLapTable();
         jTable1.setRowHeight(40);
@@ -127,12 +130,12 @@ public class ParallelS extends javax.swing.JFrame {
     
     
     
-    public class NotAvailableModel{
+    public class parallelSessionsModel{
         public String day;
         public String dur;
         public String psid;
         
-        public NotAvailableModel(String day, String dur,String psid)
+        public parallelSessionsModel(String day, String dur,String psid)
         {
             this.day= day;
             this.dur = dur;
@@ -142,7 +145,7 @@ public class ParallelS extends javax.swing.JFrame {
     
     DefaultTableModel model;
 // added rows from arraylist to jtable
-    public void addRowToJTable(ArrayList<ParallelS.NotAvailableModel> list)
+    public void addRowToJTable(ArrayList<ParallelS.parallelSessionsModel> list)
     {
         model = (DefaultTableModel) jTable1.getModel();
 //        ArrayList<Student.User> list = ListUsers();
@@ -171,8 +174,8 @@ public class ParallelS extends javax.swing.JFrame {
                 ResultSet results = statement.executeQuery(students);
                 
                     while(results.next()){
-                        ArrayList<ParallelS.NotAvailableModel> list = new ArrayList<ParallelS.NotAvailableModel>();
-                        ParallelS.NotAvailableModel u1 = new ParallelS.NotAvailableModel(results.getString("DAY"),results.getString("DUr"),results.getString("PSID"));
+                        ArrayList<ParallelS.parallelSessionsModel> list = new ArrayList<ParallelS.parallelSessionsModel>();
+                        ParallelS.parallelSessionsModel u1 = new ParallelS.parallelSessionsModel(results.getString("DAY"),results.getString("DUr"),results.getString("PSID"));
                         list.add(u1);
                         addRowToJTable(list);
                         
@@ -237,10 +240,12 @@ public class ParallelS extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         kButton2 = new keeptoo.KButton();
         jLabel12 = new javax.swing.JLabel();
-        jComboBoxNotAvailableType = new javax.swing.JComboBox<>();
+        jComboBoxDay = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         kButtonDelete = new keeptoo.KButton();
-        jTextFieldModule = new javax.swing.JTextField();
+        jTextFieldDuration = new javax.swing.JTextField();
+        jTextFieldpsid = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -512,7 +517,7 @@ public class ParallelS extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 153)));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("For");
+        jLabel4.setText("Day");
 
         kButton2.setText("ADD");
         kButton2.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
@@ -525,12 +530,12 @@ public class ParallelS extends javax.swing.JFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel12.setText("Module");
+        jLabel12.setText("Duration");
 
-        jComboBoxNotAvailableType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxNotAvailableType.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxNotAvailableTypeActionPerformed(evt);
+                jComboBoxDayActionPerformed(evt);
             }
         });
 
@@ -549,6 +554,9 @@ public class ParallelS extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel13.setText("PSID");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -566,14 +574,14 @@ public class ParallelS extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44)
-                                .addComponent(jTextFieldModule, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(141, 141, 141)
-                                .addComponent(jComboBoxNotAvailableType, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldpsid, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -584,16 +592,20 @@ public class ParallelS extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxNotAvailableType, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldModule, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(98, 98, 98)
+                .addGap(47, 47, 47)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldpsid, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(169, 169, 169)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -678,9 +690,9 @@ public class ParallelS extends javax.swing.JFrame {
         addDataToTable();
     }//GEN-LAST:event_kButton2ActionPerformed
 
-    private void jComboBoxNotAvailableTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNotAvailableTypeActionPerformed
+    private void jComboBoxDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDayActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxNotAvailableTypeActionPerformed
+    }//GEN-LAST:event_jComboBoxDayActionPerformed
 
     private void kButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButtonDeleteActionPerformed
 
@@ -688,16 +700,18 @@ public class ParallelS extends javax.swing.JFrame {
                 int i = jTable1.getSelectedRow();
                 if(i >= 0){
                     //sql part here
-                    String nfor = (String) model.getValueAt(i, 0);
-                    String MODULE = (String) model.getValueAt(i, 1);
+                    String day = (String) model.getValueAt(i, 0);
+                    String dur = (String) model.getValueAt(i, 1);
+                    String psid = (String) model.getValueAt(i, 2);
                     
-                    String sql = "DELETE FROM SLIIT.NOTOVERLAP WHERE OFOR = ?  AND MODULE = ?";
+                    String sql = "DELETE FROM SLIIT.PARALLELS WHERE day = ?  AND dur = ? AND psid = ?";
                     System.out.println(sql);
 
                     try{
                         ps = con.prepareStatement(sql);
-                        ps.setString (1, nfor);
-                        ps.setString (2, MODULE);
+                        ps.setString (1, day);
+                        ps.setString (2, dur);
+                        ps.setString(3, psid);
                         boolean result = ps.execute();
                         DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                         dtm.setRowCount(0);
@@ -798,9 +812,10 @@ public class ParallelS extends javax.swing.JFrame {
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBoxNotAvailableType;
+    private javax.swing.JComboBox<String> jComboBoxDay;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -823,7 +838,8 @@ public class ParallelS extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextFieldModule;
+    private javax.swing.JTextField jTextFieldDuration;
+    private javax.swing.JTextField jTextFieldpsid;
     private keeptoo.KButton kButton2;
     private keeptoo.KButton kButton4;
     private keeptoo.KButton kButtonDelete;
