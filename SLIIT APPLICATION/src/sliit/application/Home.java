@@ -361,6 +361,9 @@ public class Home extends javax.swing.JFrame {
     private void jBtnTagsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTagsActionPerformed
         // TODO add your handling code here:
         
+        this.dispose();
+        ParallelS ps = new ParallelS();
+        ps.setVisible(true);
         
     }//GEN-LAST:event_jBtnTagsActionPerformed
 

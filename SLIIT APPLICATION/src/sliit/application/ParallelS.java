@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author CHATA
  */
-public class NotOverLap extends javax.swing.JFrame {
+public class ParallelS extends javax.swing.JFrame {
     Connection con = JavaConnect.connectdb();
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -83,7 +83,7 @@ public class NotOverLap extends javax.swing.JFrame {
     }
     
     
-    public NotOverLap() {
+    public ParallelS() {
         initComponents();
         GraphicsEnvironment env =GraphicsEnvironment.getLocalGraphicsEnvironment();
         this.setMaximizedBounds(env.getMaximumWindowBounds());
@@ -140,7 +140,7 @@ public class NotOverLap extends javax.swing.JFrame {
     
     DefaultTableModel model;
 // added rows from arraylist to jtable
-    public void addRowToJTable(ArrayList<NotOverLap.NotAvailableModel> list)
+    public void addRowToJTable(ArrayList<ParallelS.NotAvailableModel> list)
     {
         model = (DefaultTableModel) jTable1.getModel();
 //        ArrayList<Student.User> list = ListUsers();
@@ -168,8 +168,8 @@ public class NotOverLap extends javax.swing.JFrame {
                 ResultSet results = statement.executeQuery(students);
                 
                     while(results.next()){
-                        ArrayList<NotOverLap.NotAvailableModel> list = new ArrayList<NotOverLap.NotAvailableModel>();
-                        NotOverLap.NotAvailableModel u1 = new NotOverLap.NotAvailableModel(results.getString("OFOR"),results.getString("MODULE"));
+                        ArrayList<ParallelS.NotAvailableModel> list = new ArrayList<ParallelS.NotAvailableModel>();
+                        ParallelS.NotAvailableModel u1 = new ParallelS.NotAvailableModel(results.getString("OFOR"),results.getString("MODULE"));
                         list.add(u1);
                         addRowToJTable(list);
                         
@@ -579,9 +579,10 @@ public class NotOverLap extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxNotAvailableType, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxNotAvailableType, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(41, 41, 41)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldModule, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -733,14 +734,30 @@ public class NotOverLap extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NotOverLap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ParallelS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NotOverLap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ParallelS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NotOverLap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ParallelS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NotOverLap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ParallelS.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -761,7 +778,7 @@ public class NotOverLap extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NotOverLap().setVisible(true);
+                new ParallelS().setVisible(true);
             }
         });
     }
