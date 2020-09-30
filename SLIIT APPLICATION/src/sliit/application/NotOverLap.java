@@ -28,25 +28,21 @@ public class NotOverLap extends javax.swing.JFrame {
     
     
     public void addDataToTable(){
-        String NAT;
-        String NATF;
-        String Day;
-        String From;
-        String to;
+        String nfor;
         String module;
         JavaConnect.connectdb();
-        NAT = jComboBoxNotAvailableType.getSelectedItem().toString();
+        nfor = jComboBoxNotAvailableType.getSelectedItem().toString();
         module = jTextFieldModule.getText().toString();
         
         //checck data availability
-        if(checkDataAvailable(NAT,module)){
+        if(checkDataAvailable(nfor,module)){
             System.out.println("Data not available");
             //add data to the database
             try{
-                        String sql = "INSERT INTO SLIIT.CONSECUTIVE_SESSION (OFOR, 'MODULE') VALUES (?, ?)";
+                        String sql = "INSERT INTO SLIIT.NOTOVERLAP (OFOR, MODULE) VALUES (?, ?)";
 //                ps.setString(PROPERTIES, sql);
                     ps = con.prepareStatement(sql);
-                    ps.setString (1, NAT);
+                    ps.setString (1, nfor);
                     ps.setString(2, module);
                     boolean result = ps.execute();
                     System.out.println(result);
@@ -64,8 +60,8 @@ public class NotOverLap extends javax.swing.JFrame {
         }
     }
     
-    public boolean checkDataAvailable(String CST,String module){
-        String sql = "SELECT * FROM SLIIT.CONSECUTIVE_SESSION WHERE CST = '"+CST+"' AND MODULE = '"+module+"'";
+    public boolean checkDataAvailable(String ofor,String module){
+        String sql = "SELECT * FROM SLIIT.NOTOVERLAP WHERE OFOR = '"+ofor+"' AND MODULE = '"+module+"'";
         try{
             Statement statement = con.createStatement();
  
