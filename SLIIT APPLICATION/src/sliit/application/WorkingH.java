@@ -23,6 +23,73 @@ public class WorkingH extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
+    
+    
+    public void addDataToTable(){
+        String NAT;
+        String NATF;
+        String Day;
+        String From;
+        String to;
+        JavaConnect.connectdb();
+        NAT = jComboBoxNotAvailableType.getSelectedItem().toString();
+        NATF = jComboBoxNotAvailableFor.getSelectedItem().toString();
+        Day = jComboBoxDay.getSelectedItem().toString();
+        From = jComboBoxForm.getSelectedItem().toString();
+        to = jComboBoxTo.getSelectedItem().toString();
+        
+        //checck data availability
+        if(checkDataAvailable(NAT,NATF)){
+            System.out.println("Data not available");
+            //add data to the database
+            try{
+                        String sql = "INSERT INTO SLIIT.NOTAVAILABLETIMES (NAT, NATF, NDAY, TFROM, TTO) VALUES (?, ?, ?, ?, ?)";
+//                ps.setString(PROPERTIES, sql);
+                    ps = con.prepareStatement(sql);
+                    ps.setString (1, NAT);
+                    ps.setString (2, NATF);
+                    ps.setString (3, Day);
+                    ps.setString (4, From);
+                    ps.setString (5, to);
+                    boolean result = ps.execute();
+                    System.out.println(result);
+                    
+                    DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                    dtm.setRowCount(0);
+                    showNotWorkingTable();
+                    }catch(SQLException ex){
+                        System.out.println(ex);
+                    }
+            //end of add data to the database
+            
+    }else{
+            System.out.println("data  available");
+        }
+    }
+    
+    public boolean checkDataAvailable(String NAT,String NATF){
+        String sql = "SELECT * FROM SLIIT.NOTAVAILABLETIMES WHERE NAT = '"+NAT+"' AND NATF = '"+NATF+"'";
+        try{
+            Statement statement = con.createStatement();
+ 
+            ResultSet results = statement.executeQuery(sql);
+            
+            if(results.next()){
+                JOptionPane.showMessageDialog(null, "This data already available in the database!", "", HEIGHT);
+                return false;
+            }else{
+                return true;
+            }
+            
+            }
+            catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, ex, "", HEIGHT);
+                return false;
+            }
+        
+    }
+    
+    
     public WorkingH() {
         initComponents();
         JavaConnect.connectdb();
@@ -31,8 +98,8 @@ public class WorkingH extends javax.swing.JFrame {
         jComboBoxNotAvailableFor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Y1.S1", "Y1.S2","Y2.S1","Y2.S2","Y3.S1","Y3.S2","Y4.S1","Y4.S2" }));
         
         //times array
-        
-    
+        showNotWorkingTable();
+        jTable1.setRowHeight(30);
        ArrayList<String> arr = new ArrayList<String>();
 
         int i, j;
@@ -62,15 +129,83 @@ public class WorkingH extends javax.swing.JFrame {
         }
 
         jComboBoxTo.setModel(dml2);
+        
+        
     }
     
     
     
+    public class NotAvailableModel{
+        public String NAT;
+        public String NATF;
+        public String DAY;
+        public String FROM;
+        public String TTO;
+        
+        public NotAvailableModel(String NAT, String NATF, String DAY, String FROM, String TTO)
+        {
+            this.NAT= NAT;
+            this.NATF = NATF;
+            this.DAY = DAY;
+            this.FROM = FROM;
+            this.TTO = TTO;
+        }
+    }
     
+    DefaultTableModel model;
+// added rows from arraylist to jtable
+    public void addRowToJTable(ArrayList<WorkingH.NotAvailableModel> list)
+    {
+        model = (DefaultTableModel) jTable1.getModel();
+//        ArrayList<Student.User> list = ListUsers();
+        Object rowData[] = new Object[5];
+        for(int i = 0; i < list.size(); i++)
+        {
+            rowData[0] = list.get(i).NAT;
+            rowData[1] = list.get(i).NATF;
+            rowData[2] = list.get(i).DAY;
+            rowData[3] = list.get(i).FROM;
+            rowData[4] = list.get(i).TTO;
+            model.addRow(rowData);
+        }
+                
+    }
     
     
 
+ public void showNotWorkingTable(){
+        String students = "SELECT * FROM SLIIT.NOTAVAILABLETIMES";
+            try{
+//                ps = con.createStatement();
+//                //            ps.setString(1,gettext cne eka);
+//
+//                rs = ps.executeQuery();
+                Statement statement = con.createStatement();
  
+                ResultSet results = statement.executeQuery(students);
+                
+                    while(results.next()){
+                        ArrayList<WorkingH.NotAvailableModel> list = new ArrayList<WorkingH.NotAvailableModel>();
+                        WorkingH.NotAvailableModel u1 = new WorkingH.NotAvailableModel(results.getString("NAT"),results.getString("NATF"),results.getString("NDAY"),results.getString("TFROM"),results.getString("TTO"));
+                        list.add(u1);
+                        addRowToJTable(list);
+                        
+//                        String data = results.getString("AYS");
+// 
+//                        System.out.println("Fetching data by column name for row " + results.getRow() + " : " + data);
+ 
+                    }
+//                if(rs.next()){
+//                    JOptionPane.showMessageDialog(null, "Data available", students, HEIGHT);
+//                    System.out.println(rs.findColumn("AYS"));
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "Data not available", students, HEIGHT);
+//                }
+            }
+            catch(SQLException ex){
+                JOptionPane.showMessageDialog(null, ex, students, HEIGHT);
+            }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,11 +256,13 @@ public class WorkingH extends javax.swing.JFrame {
         jComboBoxNotAvailableType = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        kButton3 = new keeptoo.KButton();
+        kButtonDelete = new keeptoo.KButton();
         jComboBoxNotAvailableFor = new javax.swing.JComboBox<>();
         jComboBoxDay = new javax.swing.JComboBox<>();
         jComboBoxForm = new javax.swing.JComboBox<>();
         jComboBoxTo = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         jLabel1.setText("Add Not Available Times");
 
@@ -368,7 +505,7 @@ public class WorkingH extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel7Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1098, Short.MAX_VALUE)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -426,13 +563,13 @@ public class WorkingH extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Not available Times");
 
-        kButton3.setText("Delete");
-        kButton3.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
-        kButton3.setkEndColor(new java.awt.Color(204, 0, 51));
-        kButton3.setkStartColor(new java.awt.Color(255, 102, 0));
-        kButton3.addActionListener(new java.awt.event.ActionListener() {
+        kButtonDelete.setText("Delete");
+        kButtonDelete.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
+        kButtonDelete.setkEndColor(new java.awt.Color(204, 0, 51));
+        kButtonDelete.setkStartColor(new java.awt.Color(255, 102, 0));
+        kButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kButton3ActionPerformed(evt);
+                kButtonDeleteActionPerformed(evt);
             }
         });
 
@@ -493,7 +630,7 @@ public class WorkingH extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(kButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(214, 214, 214))
         );
         jPanel4Layout.setVerticalGroup(
@@ -523,7 +660,7 @@ public class WorkingH extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(105, 105, 105)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(314, Short.MAX_VALUE))
         );
@@ -541,6 +678,16 @@ public class WorkingH extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Not Available Time", "For", "Day", "From", "To"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -552,7 +699,8 @@ public class WorkingH extends javax.swing.JFrame {
                     .addComponent(kGradientPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 1702, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 1210, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,7 +708,9 @@ public class WorkingH extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(kGradientPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)))
         );
 
         pack();
@@ -591,41 +741,45 @@ public class WorkingH extends javax.swing.JFrame {
 
     private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
         // TODO add your handling code here:
-
+        //Add data to table
         //validate data
 
-        
+        addDataToTable();
     }//GEN-LAST:event_kButton2ActionPerformed
 
     private void jComboBoxNotAvailableTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNotAvailableTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxNotAvailableTypeActionPerformed
 
-    private void kButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton3ActionPerformed
-//        // TODO add your handling code here:
-//        //        System.out.println(jTable1.getSelectedRow());
-//        int i = jTable1.getSelectedRow();
-//        if(i >= 0){
-//            //sql part here
-//            model.removeRow(i);
+    private void kButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButtonDeleteActionPerformed
+
+                System.out.println(jTable1.getSelectedRow());
+                int i = jTable1.getSelectedRow();
+                if(i >= 0){
+                    //sql part here
+                    String NAT = (String) model.getValueAt(i, 0);
+                    String NATF = (String) model.getValueAt(i, 1);
+                    
+                    String sql = "DELETE FROM SLIIT.NOTAVAILABLETIMES WHERE NAT = ? AND NATF = ?";
+                    System.out.println(sql);
+
+                    try{
+                        ps = con.prepareStatement(sql);
+                        ps.setString (1, NAT);
+                        ps.setString (2, NATF);
+                        boolean result = ps.execute();
+                        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                        dtm.setRowCount(0);
+                        showNotWorkingTable();
+                    }catch(SQLException e){
+                        JOptionPane.showMessageDialog(null, e, "Delete error", HEIGHT);
+                    }
 //
-//            String subGId = (String) model.getValueAt(i, 3);
-//            String sql = "DELETE FROM SLIIT.STUDENT WHERE SGID = ?";
-//
-//            try{
-//                ps = con.prepareStatement(sql);
-//                ps.setString (1, subGId);
-//                boolean result = ps.execute();
-//
-//                showStudents();
-//            }catch(SQLException e){
-//
-//            }
-//
-//        }else{
-//            System.out.println("Delete error");
-//        }
-    }//GEN-LAST:event_kButton3ActionPerformed
+        }else{
+            JOptionPane.showMessageDialog(null, "Select a row to delete", "ERROR", HEIGHT);
+            System.out.println("Delete error");
+        }
+    }//GEN-LAST:event_kButtonDeleteActionPerformed
 
     private void jComboBoxNotAvailableForActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxNotAvailableForActionPerformed
         // TODO add your handling code here:
@@ -722,11 +876,13 @@ public class WorkingH extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private keeptoo.KButton kButton2;
-    private keeptoo.KButton kButton3;
     private keeptoo.KButton kButton4;
+    private keeptoo.KButton kButtonDelete;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel4;
     private keeptoo.KGradientPanel kGradientPanel7;
