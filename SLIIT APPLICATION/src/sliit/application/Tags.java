@@ -18,6 +18,7 @@ public class Tags extends javax.swing.JFrame {
     Connection con = JavaConnect.connectdb();
     PreparedStatement ps = null;
     ResultSet rs = null;
+    DefaultTableModel model;
     /**
      * Creates new form Home
      */
@@ -619,33 +620,31 @@ public class Tags extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void kButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButtonDeleteActionPerformed
-
-//        System.out.println(jTable1.getSelectedRow());
-//        int i = jTable1.getSelectedRow();
-//        if(i >= 0){
-//            //sql part here
-//            String NAT = (String) model.getValueAt(i, 0);
-//            String NATF = (String) model.getValueAt(i, 1);
+        model = (DefaultTableModel) jTable1.getModel();
+        System.out.println(jTable1.getSelectedRow());
+        int i = jTable1.getSelectedRow();
+        if(i >= 0){
+            //sql part here
+            String ID = (String) model.getValueAt(i, 0);
 //
-//            String sql = "DELETE FROM SLIIT.NOTAVAILABLETIMES WHERE NAT = ? AND NATF = ?";
-//            System.out.println(sql);
+            String sql = "DELETE FROM SLIIT.TAG WHERE ID = ? ";
+            System.out.println(sql);
 //
-//            try{
-//                ps = con.prepareStatement(sql);
-//                ps.setString (1, NAT);
-//                ps.setString (2, NATF);
-//                boolean result = ps.execute();
-//                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-//                dtm.setRowCount(0);
-//                showNotWorkingTable();
-//            }catch(SQLException e){
-//                JOptionPane.showMessageDialog(null, e, "Delete error", HEIGHT);
-//            }
-//            //
-//        }else{
-//            JOptionPane.showMessageDialog(null, "Select a row to delete", "ERROR", HEIGHT);
-//            System.out.println("Delete error");
-//        }
+            try{
+                ps = con.prepareStatement(sql);
+                ps.setString (1, ID);
+                boolean result = ps.execute();
+                DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+                dtm.setRowCount(0);
+                showTags();
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(null, e, "Delete error", HEIGHT);
+            }
+            //
+        }else{
+            JOptionPane.showMessageDialog(null, "Select a row to delete", "ERROR", HEIGHT);
+            System.out.println("Delete error");
+        }
     }//GEN-LAST:event_kButtonDeleteActionPerformed
 
     /**
