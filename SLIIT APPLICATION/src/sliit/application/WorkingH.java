@@ -33,19 +33,21 @@ public class WorkingH extends javax.swing.JFrame {
         String Day;
         String From;
         String to;
+        String module;
         JavaConnect.connectdb();
         NAT = jComboBoxNotAvailableType.getSelectedItem().toString();
         NATF = jComboBoxNotAvailableFor.getSelectedItem().toString();
         Day = jComboBoxDay.getSelectedItem().toString();
         From = jComboBoxForm.getSelectedItem().toString();
         to = jComboBoxTo.getSelectedItem().toString();
+        module = jTextFieldModule.getText().toString();
         
         //checck data availability
         if(checkDataAvailable(NAT,NATF)){
             System.out.println("Data not available");
             //add data to the database
             try{
-                        String sql = "INSERT INTO SLIIT.NOTAVAILABLETIMES (NAT, NATF, NDAY, TFROM, TTO) VALUES (?, ?, ?, ?, ?)";
+                        String sql = "INSERT INTO SLIIT.NOTAVAILABLETIMES (NAT, NATF, NDAY, TFROM, TTO,MODULE) VALUES (?, ?, ?, ?, ?,?)";
 //                ps.setString(PROPERTIES, sql);
                     ps = con.prepareStatement(sql);
                     ps.setString (1, NAT);
@@ -53,6 +55,7 @@ public class WorkingH extends javax.swing.JFrame {
                     ps.setString (3, Day);
                     ps.setString (4, From);
                     ps.setString (5, to);
+                    ps.setString(6, module);
                     boolean result = ps.execute();
                     System.out.println(result);
                     
@@ -147,14 +150,16 @@ public class WorkingH extends javax.swing.JFrame {
         public String DAY;
         public String FROM;
         public String TTO;
+        public String MODULE;
         
-        public NotAvailableModel(String NAT, String NATF, String DAY, String FROM, String TTO)
+        public NotAvailableModel(String NAT, String NATF, String DAY, String FROM, String TTO,String MODULE)
         {
             this.NAT= NAT;
             this.NATF = NATF;
             this.DAY = DAY;
             this.FROM = FROM;
             this.TTO = TTO;
+            this.MODULE = MODULE;
         }
     }
     
@@ -164,14 +169,16 @@ public class WorkingH extends javax.swing.JFrame {
     {
         model = (DefaultTableModel) jTable1.getModel();
 //        ArrayList<Student.User> list = ListUsers();
-        Object rowData[] = new Object[5];
+        Object rowData[] = new Object[6];
         for(int i = 0; i < list.size(); i++)
         {
             rowData[0] = list.get(i).NAT;
             rowData[1] = list.get(i).NATF;
-            rowData[2] = list.get(i).DAY;
-            rowData[3] = list.get(i).FROM;
-            rowData[4] = list.get(i).TTO;
+            rowData[2] = list.get(i).MODULE;
+            rowData[3] = list.get(i).DAY;
+            rowData[4] = list.get(i).FROM;
+            rowData[5] = list.get(i).TTO;
+            
             model.addRow(rowData);
         }
                 
@@ -192,7 +199,7 @@ public class WorkingH extends javax.swing.JFrame {
                 
                     while(results.next()){
                         ArrayList<WorkingH.NotAvailableModel> list = new ArrayList<WorkingH.NotAvailableModel>();
-                        WorkingH.NotAvailableModel u1 = new WorkingH.NotAvailableModel(results.getString("NAT"),results.getString("NATF"),results.getString("NDAY"),results.getString("TFROM"),results.getString("TTO"));
+                        WorkingH.NotAvailableModel u1 = new WorkingH.NotAvailableModel(results.getString("NAT"),results.getString("NATF"),results.getString("NDAY"),results.getString("TFROM"),results.getString("TTO"),results.getString("module"));
                         list.add(u1);
                         addRowToJTable(list);
                         
@@ -267,6 +274,8 @@ public class WorkingH extends javax.swing.JFrame {
         jComboBoxDay = new javax.swing.JComboBox<>();
         jComboBoxForm = new javax.swing.JComboBox<>();
         jComboBoxTo = new javax.swing.JComboBox<>();
+        jTextFieldModule = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -607,6 +616,9 @@ public class WorkingH extends javax.swing.JFrame {
             }
         });
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel14.setText("Module");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -618,19 +630,22 @@ public class WorkingH extends javax.swing.JFrame {
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxNotAvailableType, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxNotAvailableFor, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxForm, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxTo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jComboBoxTo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldModule, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
@@ -652,7 +667,11 @@ public class WorkingH extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxNotAvailableFor, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(86, 86, 86)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldModule, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxDay, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -689,7 +708,7 @@ public class WorkingH extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Not Available Time", "For", "Day", "From", "To"
+                "Not Available Time", "For", "Module", "Day", "From", "To"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -863,6 +882,7 @@ public class WorkingH extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -886,6 +906,7 @@ public class WorkingH extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextFieldModule;
     private keeptoo.KButton kButton2;
     private keeptoo.KButton kButton4;
     private keeptoo.KButton kButtonDelete;

@@ -354,6 +354,11 @@ public class consecutiveSessions extends javax.swing.JFrame {
         jButton15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
         jButton15.setText("Not available Times");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
         kGradientPanel2.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
@@ -828,6 +833,13 @@ public class consecutiveSessions extends javax.swing.JFrame {
     private void jComboBoxToActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxToActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxToActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        WorkingH nt= new WorkingH();
+        nt.setVisible(true);
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     /**
      * @param args the command line arguments
