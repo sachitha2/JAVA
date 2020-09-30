@@ -62,6 +62,9 @@ public class consecutiveSessions extends javax.swing.JFrame {
                     DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                     dtm.setRowCount(0);
                     showNotWorkingTable();
+                    
+                    //remove content from input fields
+                    jTextFieldModule.setText("");  
                     }catch(SQLException ex){
                         System.out.println(ex);
                     }
@@ -232,12 +235,9 @@ public class consecutiveSessions extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         kGradientPanel2 = new keeptoo.KGradientPanel();
         jLabel5 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         kGradientPanel4 = new keeptoo.KGradientPanel();
@@ -252,7 +252,6 @@ public class consecutiveSessions extends javax.swing.JFrame {
         jComboBox4 = new javax.swing.JComboBox<>();
         kButton4 = new keeptoo.KButton();
         jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
         jBtnTags = new javax.swing.JButton();
         jBtnTags2 = new javax.swing.JButton();
         jBtnTags1 = new javax.swing.JButton();
@@ -315,12 +314,6 @@ public class consecutiveSessions extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("DASHBOARD");
         kGradientPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 170, 50));
-
-        jButton8.setBackground(new java.awt.Color(51, 0, 255));
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("  Timetables");
-        kGradientPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, 250, 60));
         kGradientPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jButton11.setBackground(new java.awt.Color(204, 51, 255));
@@ -340,18 +333,6 @@ public class consecutiveSessions extends javax.swing.JFrame {
         });
         kGradientPanel2.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 250, 60));
 
-        jButton13.setBackground(new java.awt.Color(153, 0, 255));
-        jButton13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setText("  Subjects");
-        kGradientPanel2.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 250, 60));
-
-        jButton14.setBackground(new java.awt.Color(153, 0, 255));
-        jButton14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("  Location");
-        kGradientPanel2.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 250, 60));
-
         jButton15.setBackground(new java.awt.Color(102, 0, 255));
         jButton15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
@@ -361,7 +342,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
                 jButton15ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+        kGradientPanel2.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 250, 60));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -497,13 +478,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
                 jButton16ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 620, 250, 60));
-
-        jButton17.setBackground(new java.awt.Color(51, 0, 255));
-        jButton17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton17.setForeground(new java.awt.Color(255, 255, 255));
-        jButton17.setText("   Statics");
-        kGradientPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 250, 60));
+        kGradientPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 250, 60));
 
         jBtnTags.setBackground(new java.awt.Color(51, 0, 255));
         jBtnTags.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -514,7 +489,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
                 jBtnTagsActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 770, 250, 60));
+        kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 250, 60));
 
         jBtnTags2.setBackground(new java.awt.Color(51, 0, 255));
         jBtnTags2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -525,7 +500,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
                 jBtnTags2ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jBtnTags2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 840, 250, 60));
+        kGradientPanel2.add(jBtnTags2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 250, 60));
 
         jBtnTags1.setBackground(new java.awt.Color(51, 0, 255));
         jBtnTags1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -536,7 +511,7 @@ public class consecutiveSessions extends javax.swing.JFrame {
                 jBtnTags1ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jBtnTags1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 910, 250, 60));
+        kGradientPanel2.add(jBtnTags1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 570, 250, 60));
 
         kGradientPanel7.setkEndColor(new java.awt.Color(204, 204, 204));
         kGradientPanel7.setkStartColor(new java.awt.Color(204, 204, 204));
@@ -945,12 +920,8 @@ public class consecutiveSessions extends javax.swing.JFrame {
     private javax.swing.JButton jBtnTags2;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBoxDay;
     private javax.swing.JComboBox<String> jComboBoxForm;

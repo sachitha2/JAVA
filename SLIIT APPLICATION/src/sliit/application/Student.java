@@ -126,12 +126,9 @@ public class Student extends javax.swing.JFrame {
 
         kGradientPanel2 = new keeptoo.KGradientPanel();
         jLabel5 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
         jButton15 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         kGradientPanel4 = new keeptoo.KGradientPanel();
@@ -146,7 +143,6 @@ public class Student extends javax.swing.JFrame {
         jComboBox4 = new javax.swing.JComboBox<>();
         kButton4 = new keeptoo.KButton();
         jButton16 = new javax.swing.JButton();
-        jButton17 = new javax.swing.JButton();
         jBtnTags = new javax.swing.JButton();
         jBtnTags2 = new javax.swing.JButton();
         jBtnTags1 = new javax.swing.JButton();
@@ -170,7 +166,6 @@ public class Student extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         kButton3 = new keeptoo.KButton();
-        kButton6 = new keeptoo.KButton();
         kButton2 = new keeptoo.KButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -183,12 +178,6 @@ public class Student extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("DASHBOARD");
         kGradientPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 170, 50));
-
-        jButton8.setBackground(new java.awt.Color(51, 0, 255));
-        jButton8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("  Timetables");
-        kGradientPanel2.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 250, 60));
         kGradientPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jButton11.setBackground(new java.awt.Color(204, 51, 255));
@@ -208,18 +197,6 @@ public class Student extends javax.swing.JFrame {
         });
         kGradientPanel2.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 250, 60));
 
-        jButton13.setBackground(new java.awt.Color(153, 0, 255));
-        jButton13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton13.setForeground(new java.awt.Color(255, 255, 255));
-        jButton13.setText("  Subjects");
-        kGradientPanel2.add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 250, 60));
-
-        jButton14.setBackground(new java.awt.Color(153, 0, 255));
-        jButton14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton14.setForeground(new java.awt.Color(255, 255, 255));
-        jButton14.setText("  Location");
-        kGradientPanel2.add(jButton14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 250, 60));
-
         jButton15.setBackground(new java.awt.Color(102, 0, 255));
         jButton15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton15.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,7 +206,7 @@ public class Student extends javax.swing.JFrame {
                 jButton15ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 250, 60));
+        kGradientPanel2.add(jButton15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 250, 60));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -365,13 +342,7 @@ public class Student extends javax.swing.JFrame {
                 jButton16ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 250, 60));
-
-        jButton17.setBackground(new java.awt.Color(51, 0, 255));
-        jButton17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton17.setForeground(new java.awt.Color(255, 255, 255));
-        jButton17.setText("   Statics");
-        kGradientPanel2.add(jButton17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
+        kGradientPanel2.add(jButton16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 250, 60));
 
         jBtnTags.setBackground(new java.awt.Color(51, 0, 255));
         jBtnTags.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -382,7 +353,7 @@ public class Student extends javax.swing.JFrame {
                 jBtnTagsActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 250, 60));
+        kGradientPanel2.add(jBtnTags, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 250, 60));
 
         jBtnTags2.setBackground(new java.awt.Color(51, 0, 255));
         jBtnTags2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -393,7 +364,7 @@ public class Student extends javax.swing.JFrame {
                 jBtnTags2ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jBtnTags2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 740, 250, 60));
+        kGradientPanel2.add(jBtnTags2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 250, 60));
 
         jBtnTags1.setBackground(new java.awt.Color(51, 0, 255));
         jBtnTags1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -404,7 +375,7 @@ public class Student extends javax.swing.JFrame {
                 jBtnTags1ActionPerformed(evt);
             }
         });
-        kGradientPanel2.add(jBtnTags1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 810, 250, 60));
+        kGradientPanel2.add(jBtnTags1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 530, 250, 60));
 
         kGradientPanel7.setkEndColor(new java.awt.Color(204, 204, 204));
         kGradientPanel7.setkStartColor(new java.awt.Color(204, 204, 204));
@@ -521,16 +492,6 @@ public class Student extends javax.swing.JFrame {
             }
         });
 
-        kButton6.setText("EDIT");
-        kButton6.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
-        kButton6.setkEndColor(new java.awt.Color(204, 0, 51));
-        kButton6.setkStartColor(new java.awt.Color(255, 102, 0));
-        kButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kButton6ActionPerformed(evt);
-            }
-        });
-
         kButton2.setText("Delete");
         kButton2.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         kButton2.setkEndColor(new java.awt.Color(204, 0, 51));
@@ -570,7 +531,6 @@ public class Student extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(kButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(44, Short.MAX_VALUE))
@@ -608,9 +568,7 @@ public class Student extends javax.swing.JFrame {
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(kButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(kButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(32, 32, 32)
                 .addComponent(kButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -722,6 +680,11 @@ public class Student extends javax.swing.JFrame {
                     DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
                     dtm.setRowCount(0);
                     showStudents();
+                    //remove content from input fields
+                    jTextField1.setText(""); 
+                    jTextField2.setText(""); 
+                    jTextField3.setText(""); 
+                    jTextField4.setText(""); 
                     }catch(SQLException ex){
                         System.out.println(ex);
                     }
@@ -833,10 +796,6 @@ public class Student extends javax.swing.JFrame {
             jTextField2.setText(jTable1.getValueAt(i,0).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void kButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kButton6ActionPerformed
-
     private void jBtnTags2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnTags2ActionPerformed
         // TODO add your handling code here:
         //this is consseccetive sessions button
@@ -906,13 +865,9 @@ public class Student extends javax.swing.JFrame {
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox4;
@@ -946,7 +901,6 @@ public class Student extends javax.swing.JFrame {
     private keeptoo.KButton kButton2;
     private keeptoo.KButton kButton3;
     private keeptoo.KButton kButton4;
-    private keeptoo.KButton kButton6;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel4;
     private keeptoo.KGradientPanel kGradientPanel7;
