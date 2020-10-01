@@ -48,6 +48,7 @@ public class Student extends javax.swing.JFrame {
                 Statement statement = con.createStatement();
  
                 ResultSet results = statement.executeQuery(students);
+//                con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 
                     while(results.next()){
                         ArrayList<Student.User> list = new ArrayList<Student.User>();
@@ -57,7 +58,6 @@ public class Student extends javax.swing.JFrame {
                         
                         String data = results.getString("AYS");
  
-                        System.out.println("Fetching data by column name for row " + results.getRow() + " : " + data);
  
                     }
 //                if(rs.next()){

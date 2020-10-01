@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Thu Oct 01 15:04:01 IST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0174-e382-e9f9-000005b47dd0 
+on database directory G:\JAVA\SLIIT APPLICATION\sliit with class loader sun.misc.Launcher$AppClassLoader@6f94fa3e 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_172/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_172-b11
+user.dir=G:\JAVA\SLIIT APPLICATION
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

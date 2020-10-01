@@ -19,9 +19,11 @@ public class JavaConnect {
     public static Connection connectdb(){
         Connection con  = null;
         try {
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/sliit","sliit","sliit");
+            String pathDir = System.getProperty("user.dir");
+            con = DriverManager.getConnection("jdbc:derby:"+pathDir+"/sliit","sliit","sliit");
+            
             return con;
-        } catch (SQLException ex) {
+        } catch (SQLException  ex) {
             Logger.getLogger(JavaConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
